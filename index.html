@@ -1,12 +1,53 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Particle Groups</title>
+    <link rel="stylesheet" href="style.css">
     <script src="p5.min.js"></script>
+    <script src="main.js"></script>
     <script src="particles.js"></script>
     <script src="rule.js"></script>
-    <script src="sketch.js"></script>
-    <style> body {padding: 0; margin: 0;} </style>
-  </head>
-  <body>
-  </body>
+</head>
+<body>
+    <div class="input-container">
+        <label for="group-name">Group Name:</label>
+        <input type="text" id="group-name" placeholder="Group Name">
+        <label for="num-particles">Number of Particles:</label>
+        <input type="number" id="num-particles" placeholder="Number of Particles">
+        <label for="group-color">Color:</label>
+        <input type="text" id="group-color" placeholder="Color">
+        <button id="add-group-btn">Add Group</button>
+    </div>
+
+    <table id="relationship-table">
+        <thead>
+            <tr>
+                <th>Group 1</th>
+                <th>Group 2</th>
+                <th>Gravity</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <div>
+        <button id="start-btn">Start</button>
+        <button id="reset-btn">Reset</button>
+        <button id="preset-btn">Preset</button>
+    </div>
+
+    <div>
+      <script src="sketch.js"></script>
+    </div>
+<!-- 
+    <script>
+ 
+    </script> -->
+
+</body>
 </html>
+
+
