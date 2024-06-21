@@ -7,6 +7,10 @@ function init() {
     start(groups)
     reset()
     preset()
+    addGroup()
+}
+
+function addGroup() {
     document.getElementById('add-group-btn').addEventListener('click', () => {
         let groupName = document.getElementById('group-name').value;
         let numParticles = document.getElementById('num-particles').value;
@@ -18,21 +22,20 @@ function init() {
         }
     });
 }
-
 function updateHTMLTable() {
     let tableBody = document.querySelector('#relationship-table tbody');
     tableBody.innerHTML = '';
 
     for (let i = 0; i < groups.length; i++) {
         for (let j = 0; j < groups.length; j++) {
-            tableBody.innerHTML += `<tr><td>${groups[i].name}</td><td>${groups[j].name}</td><td><input type="number" value='0'></td></tr>`
+            tableBody.innerHTML += `<tr><td>${groups[i].name}</td><td>${groups[j].name}</td><td><input type="range" min='-5.00' max='5.00' class='slider' value='0'></td></tr>`
         }
     }
 }
 
 function start(groups) {
     document.getElementById('start-btn').addEventListener('click', () => {
-        console.log('Start button clicked');
+        // console.log('Start button clicked');
         if (!START) {START = true}
 
         // update relationship between groups
@@ -43,7 +46,7 @@ function start(groups) {
             let group2name = td[1].textContent
             let g = td[2].querySelector('input').value
             g = parseFloat(g)
-            console.log(group1name, group2name, g)
+            // console.log(group1name, group2name, g)
             for (let i=0; i< groups.length; i++) {
                 if (groups[i].name == group1name) {
                     groups[i].addRelationship(group2name, g)
@@ -66,9 +69,9 @@ function reset() {
 
 function preset() {
     document.getElementById('preset-btn').addEventListener('click', () => {
-    groups.push(new Group("red", 10, 255*65536+0*256+0));
-    groups.push(new Group('yellow', 20, 255*65536+255*256))
-    groups.push(new Group('blue', 20, 255))
+    groups.push(new Group("red", 10, color('red')));
+    groups.push(new Group('yellow', 20,color('yellow')))
+    groups.push(new Group('blue', 20, color('blue')))
     updateHTMLTable();
     })
 }
