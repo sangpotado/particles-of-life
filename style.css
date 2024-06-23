@@ -1,5 +1,8 @@
 body {
     font-family: Arial, sans-serif;
+    background-color: #1a1a1a; /* Dark background color */
+    color: #f0f0f0; /* Light font color */
+    padding: 20px;
 }
 .input-container {
     margin-bottom: 20px;
@@ -8,16 +11,26 @@ body {
     margin-right: 10px;
 }
 table {
-    width: 100%;
+    width: 70%;
     border-collapse: collapse;
     margin-bottom: 20px;
 }
 table, th, td {
-    border: 1px solid black;
+    border: 0.5px solid #f0f0f0;
+    font-size: 15px;
+    height: 20px;
 }
-th, td {
+/* Decrease the height of the table rows and cells */
+table tr, table td {
+    height: 20px; /* Adjust the height as needed */
     padding: 10px;
     text-align: center;
+}
+
+.color-table-container {
+    display: flex;
+    gap: 20px; /* Optional: Add some space between the tables */
+    align-items: flex-start; /* Align tables at the top */
 }
 .canvas-container {
     border: 1px solid #000;
