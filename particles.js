@@ -47,11 +47,11 @@ class Particle {
         // Dampen velocities (to simulate friction or air resistance)
         this.vx = (this.vx + this.fx) * 0.5
         this.vy = (this.vy + this.fy) * 0.5
-        if (this.x <= 0 || this.x >= 1024) { 
+        if (this.x <= 0 || this.x >= WIDTH) { 
             this.vx = -this.vx; 
             // this.x = 500 //experiment
             } 
-        if (this.y <= 0 || this.y >= 512) { 
+        if (this.y <= 0 || this.y >= HEIGHT) { 
             this.vy = -this.vy; 
             // this.y = 288 //experiment
         } 

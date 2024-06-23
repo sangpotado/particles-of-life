@@ -39,7 +39,7 @@ function updateHTMLTable() {
 
     for (let i = 0; i < groups.length; i++) {
         for (let j = 0; j < groups.length; j++) {
-            tableBody.innerHTML += `<tr><td>${groups[i].name}</td><td>${groups[j].name}</td><td><input type="range" min='-5.00' max='5.00' class='slider' step="0.1" value='0' oninput="addRelationshipFromHTML()"></td></tr>`
+            tableBody.innerHTML += `<tr><td>${groups[i].name}</td><td>${groups[j].name}</td><td><input type="range" min='-2.00' max='2.00' class='slider' step="0.1" value='0' oninput="addRelationshipFromHTML()"></td></tr>`
         }
     }
 }
