@@ -34,32 +34,75 @@ function addGroup() {
     });
 }
 function updateHTMLTable() {
+    // Select the table head element
+    let tableHead = document.querySelector('#relationship-table thead');
+    // Start the table row with the header for the first empty cell
+    let headHTML = '<tr><th>Empty cell</th>';
+    // Loop through groups to create table headers for group names
+    for (let i = 0; i < groups.length; i++) {
+        headHTML += `<th>${groups[i].name}</th>`;
+    }
+    // Close the table row
+    headHTML += `</tr>`;
+    tableHead.innerHTML = headHTML;
+
+    // Select the table body element
     let tableBody = document.querySelector('#relationship-table tbody');
+    // Clear the table body to prevent appending to existing rows on subsequent calls
     tableBody.innerHTML = '';
 
-    for (let i = 0; i < groups.length; i++) {
-        for (let j = 0; j < groups.length; j++) {
-            tableBody.innerHTML += `<tr><td>${groups[i].name}</td><td>${groups[j].name}</td><td><input type="range" min='-2.00' max='2.00' class='slider' step="0.1" value='0' oninput="addRelationshipFromHTML()"></td></tr>`
-        }
+   // Loop through groups to create table rows for group names
+   for (let i = 0; i < groups.length; i++) {
+    // Start a new row with the group name in the first column
+    let rowHTML = `<tr><td>${groups[i].name}</td>`;
+    
+    // Loop through groups again to create input range sliders for each cell
+    for (let j = 0; j < groups.length; j++) {
+        rowHTML += `<td>
+                        <input type="range" min='-2.00' max='2.00' class='slider' step="0.1" value='0' oninput="addRelationshipFromHTML()">
+                    </td>`;
     }
+
+    // Close the table row
+    rowHTML += `</tr>`;
+
+    // Append the row to the table body
+    tableBody.innerHTML += rowHTML;
+    }
+        // for (let j = 0; j < groups.length; j++) {
+        //     tableBody.innerHTML += `<tr><td>${groups[i].name}</td><td>${groups[j].name}</td><td><input type="range" min='-2.00' max='2.00' class='slider' step="0.1" value='0' oninput="addRelationshipFromHTML()"></td></tr>`
+        // }
+
 }
 
 function addRelationshipFromHTML() {
-    // update relationship between groups
-    let tableBody = document.querySelectorAll('#relationship-table tbody tr');
-    tableBody.forEach(tr => {
-        let td = tr.querySelectorAll('td');
-        let group1name = td[0].textContent;
-        let group2name = td[1].textContent;
-        let g = td[2].querySelector('input').value;
-        g = parseFloat(g);
-        
-        for (let i = 0; i < groups.length; i++) {
-            if (groups[i].name == group1name) {
-                groups[i].addRelationship(group2name, g);
-            }
+    // Select all rows in the table body
+    let tableRows = document.querySelectorAll('#relationship-table tbody tr');
+// Iterate through each row
+tableRows.forEach(row => {
+    // Get the group name from the first cell in the row (row group)
+    let rowGroup = row.querySelector('td').textContent;
+
+    // Select all cells in the row
+    let cells = row.querySelectorAll('td');
+
+    // Iterate through each cell starting from the second cell
+    for (let i = 1; i < cells.length; i++) {
+        // Get the column group name from the header (column group)
+        let columnGroup = document.querySelector(`#relationship-table thead th:nth-child(${i + 1})`).textContent;
+
+        // Get the gravity value from the input slider
+        let gravity = parseFloat(cells[i].querySelector('input').value);
+
+        // Find the row group object
+        let rowGroupObject = groups.find(group => group.name === rowGroup);
+
+        // Update the relationship for the row group
+        if (rowGroupObject) {
+            rowGroupObject.addRelationship(columnGroup, gravity);
         }
-    });
+    }
+});
 }
 function start() {
     document.getElementById('start-btn').addEventListener('click', () => {
